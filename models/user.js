@@ -25,15 +25,26 @@ module.exports = (sequelize, DataTypes) => {
     username: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
-        notEmpty: true
+        notEmpty: true,
+        isAlphanumeric: {
+          msg: "The username can only contains letters and numbers."
+        },
+        len: {
+          args: [3, 12],
+          msg: 'The username must be between 3 and 25 characters'
+        }
       }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        notEmpty: true
+        notEmpty: true,
+        isEmail: {
+          msg: "Invalid Email"
+        }
       }
     },
     password: {
